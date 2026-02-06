@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
-
-<title>Dhruv 💘 Valentine</title>
-
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -18,14 +12,17 @@ body {
   align-items: center;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
+  padding: 16px;
 }
 
 /* Floating emojis */
 .floating {
   position: absolute;
-  font-size: 24px;
+  font-size: 20px;
   animation: floatUp 6s linear infinite;
+  pointer-events: none;
 }
+
 @keyframes floatUp {
   from { transform: translateY(100vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
@@ -35,36 +32,30 @@ body {
 .card {
   position: relative;
   background: #ffffff;
-  width: 90%;
+  width: 100%;
   max-width: 360px;
-  padding: 32px 24px;
-  border-radius: 32px;
+  padding: 28px 20px;
+  border-radius: 28px;
   text-align: center;
   box-shadow: 0 25px 50px rgba(0,0,0,0.25);
   animation: cardEntry 0.8s ease;
-  transition: transform 0.8s ease;
-  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
 }
 
 @keyframes cardEntry {
-  from { transform: translateY(40px) scale(0.9); opacity: 0; }
+  from { transform: translateY(40px) scale(0.95); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* Flip */
-.card.flip {
-  transform: rotateY(180deg);
 }
 
 h1 {
   font-family: 'Pacifico', cursive;
   color: #ff4d6d;
-  font-size: 2rem;
-  margin-bottom: 12px;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #444;
   line-height: 1.5;
@@ -80,7 +71,7 @@ button {
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  position: relative;
+  touch-action: manipulation;
 }
 
 .yes {
@@ -91,35 +82,22 @@ button {
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.07); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
 .no {
   background: #eee;
-}
-
-/* YES hover heart */
-.yes:hover::after {
-  content: "💘";
-  position: absolute;
-  right: -10px;
-  top: -10px;
-  font-size: 20px;
-  animation: pop 0.6s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
+  color: #333;
+  position: relative;
 }
 
 /* Confetti */
 .confetti {
   position: fixed;
   top: -10px;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   animation: fall 3s linear forwards;
   z-index: 999;
 }
@@ -131,103 +109,3 @@ button {
   }
 }
 </style>
-</head>
-
-<body>
-
-<div class="card" id="card">
-  <h1>Hey Dhruv 👀❤️</h1>
-
-  <p>
-    Look at all this romance floating around 😌<br><br>
-    This is a very serious question.<br>
-    Answer wisely… snacks, dates & vibes depend on this 🍿😏
-  </p>
-
-  <p id="thinking" style="font-size:0.85rem; opacity:0.8;">
-    Dhruv is thinking… 🤔
-  </p>
-
-  <p style="font-size:1.0rem;">
-    Will you be my Valentine? 😌
-  </p>
-
-  <button class="yes" onclick="yesClicked()">YES 💕</button>
-  <button class="no" onmouseover="moveNo()">NO 🙄</button>
-</div>
-
-<script>
-/* Floating emojis */
-const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
-setInterval(() => {
-  const e = document.createElement("div");
-  e.className = "floating";
-  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left = Math.random()*100 + "%";
-  document.body.appendChild(e);
-  setTimeout(() => e.remove(), 6000);
-}, 500);
-
-/* Thinking text toggle */
-setInterval(() => {
-  const t = document.getElementById("thinking");
-  if (!t) return;
-  t.innerText = t.innerText.includes("🤔")
-    ? "Dhruv is overthinking… 😵‍💫"
-    : "Dhruv is thinking… 🤔";
-}, 2000);
-
-/* NO button escape */
-function moveNo() {
-  const btn = document.querySelector(".no");
-  btn.style.position = "absolute";
-  btn.style.left = Math.random()*75 + "%";
-  btn.style.top = Math.random()*75 + "%";
-  btn.innerText = "NOPE 😜";
-}
-
-/* YES click */
-function yesClicked() {
-  const card = document.getElementById("card");
-  card.classList.add("flip");
-
-  setTimeout(() => {
-    card.innerHTML = `
-      <h1>HAHA 😎❤️</h1>
-      <p>
-        Dhruv, you said YES 😌<br><br>
-        You’re officially and forever mine now 💕<br><br>
-        <span style="background:#fff0f4; padding:6px 10px; border-radius:12px;">
-          🎉 Congratulations, you’re stuck with me 🎉
-        </span>
-      </p>
-      <p style="font-size:0.85rem; margin-top:10px;">
-        📸 Screenshot this moment — it’s officially ours 💖
-      </p>
-    `;
-    card.classList.remove("flip");
-  }, 400);
-
-  confettiBurst();
-}
-
-/* Confetti burst */
-function confettiBurst() {
-  const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
-  for (let i = 0; i < 80; i++) {
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random()*100 + "vw";
-    c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
-    c.style.animationDuration = 2 + Math.random()*2 + "s";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 4000);
-  }
-}
-</script>
-
-</body>
-</html>
-
-
-
