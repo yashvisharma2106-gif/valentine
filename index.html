@@ -163,6 +163,32 @@ button:hover {
   from { transform: translateY(-10vh); opacity: 1; }
   to { transform: translateY(100vh); opacity: 0; }
 }
+  .confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  animation: fall 3s linear forwards;
+  z-index: 999;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 💌 Card flip */
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+.card {
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
 </style>
 </head>
 
@@ -204,16 +230,25 @@ function moveNo() {
   btn.style.top = Math.random()*80 + "%";
 }
 
-/* YES clicked */
 function yesClicked() {
-  document.getElementById("card").innerHTML = `
-    <h1>HAHA 😎❤️</h1>
-    <p>
-      Dhruv, you said YES 😌<br><br>
-     You’re officially mine now… forever. No escape 😈❤️<br><br>
-      You are officially my Valentine 💃🕺<br>
-      No undo. No escape.
-    </p>
+  const card = document.getElementById("card");
+
+  card.classList.add("flip");
+
+  setTimeout(() => {
+    card.innerHTML = `
+      <h1>HAHA 😎❤️</h1>
+      <p>
+        Dhruv, you said YES 😌<br><br>
+        You’re officially and forever mine now 💕<br><br>
+        Valentine mode: ON 💃🕺
+      </p>
+    `;
+    card.classList.remove("flip");
+  }, 400);
+
+  confettiBurst();
+}
   `;
   heartRain();
 }
@@ -233,6 +268,7 @@ function heartRain() {
 
 </body>
 </html>
+
 
 
 
