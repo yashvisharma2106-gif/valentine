@@ -55,27 +55,14 @@ body {
   to { transform: translateY(-200px); }
 }
 
-/* 💕 FLOATING EMOJIS */
-.floating {
-  position: absolute;
-  font-size: 24px;
-  animation: floatUp 6s linear infinite;
-  z-index: 1;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-10vh); opacity: 0; }
-}
-
 /* 💌 CARD */
 .card {
   position: relative;
   z-index: 2;
   background: #ffffff;
-  width: 90%;
+  width: 92%;
   max-width: 360px;
-  padding: 32px 24px;
+  padding: 28px 22px;
   border-radius: 32px;
   text-align: center;
   box-shadow: 0 25px 50px rgba(0,0,0,0.25);
@@ -98,14 +85,33 @@ h1 {
   font-family: 'Pacifico', cursive;
   color: #ff4d6d;
   font-size: 2rem;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #444;
   line-height: 1.5;
+}
+
+/* 💘 VALENTINE QUESTION */
+.valentine-question {
+  margin: 16px 0;
+  padding: 14px 12px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.55rem;
+  color: #ff2f68;
+  background: linear-gradient(135deg, #fff0f4, #ffe4ec);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 10px rgba(255,77,109,0.3); }
+  50% { box-shadow: 0 0 25px rgba(255,77,109,0.6); }
+  100% { box-shadow: 0 0 10px rgba(255,77,109,0.3); }
 }
 
 /* 🔘 BUTTONS */
@@ -173,25 +179,22 @@ button {
 
 <body>
 
-<!-- 🌟 SPARKLE LAYER -->
 <div class="sparkles"></div>
 
-<!-- 💖 CARD -->
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
 
   <p>
-    Look at all this romance floating around 😌<br><br>
-    This is a very serious question.<br>
-    Will you be My Valentine? 😌
+    Valentine season has officially started 😌<br>
+    And somehow… you are right in the middle of it.
   </p>
+
+  <div class="valentine-question">
+    Will you be my Valentine? 💖
+  </div>
 
   <p id="thinking" style="font-size:0.85rem; opacity:0.8;">
     Dhruv is thinking… 🤔
-  </p>
-
-  <p style="font-size:0.9rem;">
-   Answer wisely… snacks, dates & vibes depend on this 🍿😏
   </p>
 
   <button class="yes" onclick="yesClicked()">YES 💕</button>
@@ -199,18 +202,19 @@ button {
 </div>
 
 <script>
-/* 💕 FLOATING EMOJIS */
+/* Floating emojis */
 const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
 setInterval(() => {
   const e = document.createElement("div");
-  e.className = "floating";
   e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.position = "absolute";
   e.style.left = Math.random()*100 + "%";
+  e.style.fontSize = "24px";
   document.body.appendChild(e);
   setTimeout(() => e.remove(), 6000);
 }, 500);
 
-/* 🤔 THINKING TEXT */
+/* Thinking text */
 setInterval(() => {
   const t = document.getElementById("thinking");
   if (!t) return;
@@ -219,7 +223,7 @@ setInterval(() => {
     : "Dhruv is thinking… 🤔";
 }, 2000);
 
-/* 😈 NO BUTTON ESCAPE */
+/* NO button escape */
 function moveNo() {
   const btn = document.querySelector(".no");
   btn.style.position = "absolute";
@@ -228,7 +232,7 @@ function moveNo() {
   btn.innerText = "NOPE 😜";
 }
 
-/* 💌 YES CLICK */
+/* YES click */
 function yesClicked() {
   const card = document.getElementById("card");
   card.classList.add("flip");
@@ -237,14 +241,12 @@ function yesClicked() {
     card.innerHTML = `
       <h1>HAHA 😎❤️</h1>
       <p>
-        Dhruv, you said YES 😌<br><br>
+        You said YES 😌<br><br>
         You’re officially and forever mine now 💕<br><br>
-        <span style="background:#fff0f4; padding:6px 10px; border-radius:12px;">
-          🎉 Congratulations, you’re stuck with me 🎉
-        </span>
+        🎉 Valentine mode: ON 🎉
       </p>
-      <p style="font-size:0.85rem; margin-top:10px;">
-        📸 Screenshot this moment — it’s officially ours 💖
+      <p style="font-size:0.85rem;">
+        📸 Screenshot this moment 💖
       </p>
     `;
     card.classList.remove("flip");
@@ -253,7 +255,7 @@ function yesClicked() {
   confettiBurst();
 }
 
-/* 🎉 CONFETTI BURST */
+/* Confetti */
 function confettiBurst() {
   const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
   for (let i = 0; i < 80; i++) {
@@ -270,4 +272,3 @@ function confettiBurst() {
 
 </body>
 </html>
-
