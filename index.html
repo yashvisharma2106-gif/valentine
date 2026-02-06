@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
 <title>Dhruv 💘 Valentine</title>
 
 <style>
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ffb199);
+  background: linear-gradient(135deg, #ff6f91, #ffb6c1);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
-
 /* Floating emojis */
 .floating {
   position: absolute;
@@ -31,20 +31,40 @@ body {
 /* Main card */
 .card {
   position: relative;
-  background: rgba(255, 255, 255, 0.85);
+  background: #ffffff; /* solid white */
   width: 90%;
   max-width: 360px;
-  padding: 30px 22px 28px;
-  border-radius: 30px;
+  padding: 32px 24px 28px;
+  border-radius: 32px;
   text-align: center;
+
+  /* separation from background */
   box-shadow:
-    0 20px 40px rgba(255, 77, 109, 0.35),
-    inset 0 0 20px rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
+    0 25px 50px rgba(0, 0, 0, 0.25),
+    0 0 0 3px rgba(255, 255, 255, 0.6);
+
   animation: cardEntry 0.8s ease-out;
-  overflow: hidden;
 }
 
+/* subtle floating effect */
+@keyframes cardEntry {
+  0% {
+    transform: translateY(30px) scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(255,77,109,0.25), transparent 70%);
+  z-index: -1;
+  border-radius: 40px;
+}
 /* gradient border glow */
 .card::before {
   content: "";
@@ -73,9 +93,11 @@ body {
 }
 
 h1 {
-  font-size: 1.9rem;
+  font-family: 'Pacifico', cursive;
+  font-size: 2.1rem;
   color: #ff4d6d;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
   animation: wiggle 2s infinite;
 }
 
@@ -86,47 +108,28 @@ h1 {
 }
 
 p {
-  font-size: 1.05rem;
+  font-size: 1.08rem;
+  font-weight: 600;
   color: #444;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 button {
   width: 100%;
-  padding: 14px;
+  padding: 15px;
   margin-top: 12px;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
   border: none;
   border-radius: 999px;
   cursor: pointer;
+  letter-spacing: 0.5px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.play {
-  background: linear-gradient(135deg, #333, #555);
-  color: white;
-}
-
-.yes {
-  background: linear-gradient(135deg, #ff4d6d, #ff758c);
-  color: white;
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.07); }
-  100% { transform: scale(1); }
-}
-
-.no {
-  background: #f2f2f2;
-  color: #333;
 }
 
 .play {
@@ -167,22 +170,30 @@ button:hover {
 <body>
 
 <!-- Background Music -->
-<audio id="music" preload="auto">
+<audio controls style="width:100%; margin-top:12px;">
   <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support audio.
 </audio>
 
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
   <p>
     Look at all this romance floating around 😌<br><br>
-    Careless Whisper wants to ask you something 🎷
+    Okay, no pressure… but this decides snacks, dates, and vibes 🍿😏
   </p>
 
-  <button class="play" onclick="playMusic()">🎷 Play Music</button>
+  <p style="font-size:0.9rem; font-weight:600; margin-top:10px;">
+    Press play for the full vibe 🎷💘
+  </p>
+
+  <audio controls style="width:100%; margin-top:6px; border-radius:14px;">
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+
   <button class="yes" onclick="yesClicked()">YES 💕</button>
   <button class="no" onmouseover="moveNo()">NO 🙄</button>
 </div>
-
 <script>
 /* Floating cute emojis */
 const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
@@ -196,24 +207,6 @@ setInterval(() => {
   setTimeout(() => e.remove(), 6000);
 }, 500);
 
-/* Music */
-function playMusic() {
-  const music = document.getElementById("music");
-  music.muted = false;
-  music.volume = 1.0;
-
-  const playPromise = music.play();
-
-  if (playPromise !== undefined) {
-    playPromise
-      .then(() => {
-        console.log("Music started 🎷");
-      })
-      .catch(() => {
-        alert("Tap the Play Music 🎷 button once more 😊");
-      });
-  }
-}
 
 /* NO button runs away */
 function moveNo() {
@@ -229,7 +222,7 @@ function yesClicked() {
     <h1>HAHA 😎❤️</h1>
     <p>
       Dhruv, you said YES 😌<br><br>
-      Careless Whisper approved this relationship 🎷<br><br>
+     You’re officially mine now… forever. No escape 😈❤️<br><br>
       You are officially my Valentine 💃🕺<br>
       No undo. No escape.
     </p>
@@ -252,5 +245,6 @@ function heartRain() {
 
 </body>
 </html>
+
 
 
