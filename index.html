@@ -30,14 +30,41 @@ body {
 
 /* Main card */
 .card {
-  background: white;
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
   width: 90%;
   max-width: 360px;
-  padding: 25px;
-  border-radius: 25px;
+  padding: 30px 22px 28px;
+  border-radius: 30px;
   text-align: center;
-  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
-  animation: popIn 0.7s ease;
+  box-shadow:
+    0 20px 40px rgba(255, 77, 109, 0.35),
+    inset 0 0 20px rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  animation: cardEntry 0.8s ease-out;
+  overflow: hidden;
+}
+
+/* gradient border glow */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #ff4d6d, #ff9a9e, #ffd1dc);
+  z-index: -1;
+}
+
+/* card entry animation */
+@keyframes cardEntry {
+  0% {
+    transform: translateY(30px) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes popIn {
@@ -46,22 +73,60 @@ body {
 }
 
 h1 {
+  font-size: 1.9rem;
   color: #ff4d6d;
+  margin-bottom: 10px;
+  animation: wiggle 2s infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-1deg); }
+  75% { transform: rotate(1deg); }
 }
 
 p {
   font-size: 1.05rem;
+  color: #444;
+  line-height: 1.4;
 }
 
-/* Buttons */
 button {
   width: 100%;
   padding: 14px;
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 1rem;
   border: none;
-  border-radius: 30px;
+  border-radius: 999px;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.play {
+  background: linear-gradient(135deg, #333, #555);
+  color: white;
+}
+
+.yes {
+  background: linear-gradient(135deg, #ff4d6d, #ff758c);
+  color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+  100% { transform: scale(1); }
+}
+
+.no {
+  background: #f2f2f2;
+  color: #333;
 }
 
 .play {
@@ -187,4 +252,5 @@ function heartRain() {
 
 </body>
 </html>
+
 
