@@ -3,33 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dhruv 😌❤️</title>
+<title>Dhruv 💘 Valentine</title>
 
 <style>
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff4d6d, #ffb3c1);
+  background: linear-gradient(135deg, #ff758c, #ffb199);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
   overflow: hidden;
 }
 
+/* Floating emojis */
+.floating {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 6s linear infinite;
+}
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Main card */
 .card {
   background: white;
   width: 90%;
   max-width: 360px;
   padding: 25px;
-  border-radius: 20px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-  animation: pop 0.6s ease;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+  animation: popIn 0.7s ease;
 }
 
-@keyframes pop {
-  0% { transform: scale(0.5); opacity: 0; }
+@keyframes popIn {
+  0% { transform: scale(0.4); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
@@ -37,11 +49,16 @@ h1 {
   color: #ff4d6d;
 }
 
+p {
+  font-size: 1.05rem;
+}
+
+/* Buttons */
 button {
   width: 100%;
   padding: 14px;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -55,6 +72,13 @@ button {
 .yes {
   background: #ff4d6d;
   color: white;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 
 .no {
@@ -62,30 +86,31 @@ button {
   position: relative;
 }
 
+/* Final hearts rain */
 .heart {
   position: absolute;
-  bottom: 0;
-  font-size: 24px;
-  animation: float 5s linear infinite;
+  font-size: 28px;
+  animation: heartRain 5s linear infinite;
 }
-
-@keyframes float {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-100vh); opacity: 0; }
+@keyframes heartRain {
+  from { transform: translateY(-10vh); opacity: 1; }
+  to { transform: translateY(100vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
+<!-- Background Music -->
+<audio id="music">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
   <p>
-    Important question 😌<br><br>
-    Will you be my Valentine?
+    Look at all this romance floating around 😌<br><br>
+    Careless Whisper wants to ask you something 🎷
   </p>
 
   <button class="play" onclick="playMusic()">🎷 Play Music</button>
@@ -94,38 +119,54 @@ button {
 </div>
 
 <script>
+/* Floating cute emojis */
+const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
+setInterval(() => {
+  const e = document.createElement("div");
+  e.className = "floating";
+  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random()*100 + "%";
+  e.style.animationDuration = (4 + Math.random()*3) + "s";
+  document.body.appendChild(e);
+  setTimeout(() => e.remove(), 6000);
+}, 500);
+
+/* Music */
 function playMusic() {
   const m = document.getElementById("music");
-  m.muted = false;
-  m.volume = 1.0;
-  m.play();
+  m.volume = 1;
+  m.play().catch(() => alert("Tap once more 😅"));
 }
 
+/* NO button runs away */
 function moveNo() {
   const btn = document.querySelector(".no");
   btn.style.position = "absolute";
-  btn.style.left = Math.random() * 80 + "%";
-  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random()*80 + "%";
+  btn.style.top = Math.random()*80 + "%";
 }
 
+/* YES clicked */
 function yesClicked() {
   document.getElementById("card").innerHTML = `
     <h1>HAHA 😎❤️</h1>
     <p>
-      You clicked YES, Dhruv 😌<br><br>
-      Careless Whisper approved 🎷<br>
-      You are my Valentine now 💃🕺
+      Dhruv, you said YES 😌<br><br>
+      Careless Whisper approved this relationship 🎷<br><br>
+      You are officially my Valentine 💃🕺<br>
+      No undo. No escape.
     </p>
   `;
-  startHearts();
+  heartRain();
 }
 
-function startHearts() {
+/* Heart rain animation */
+function heartRain() {
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerHTML = "❤️";
-    h.style.left = Math.random() * 100 + "%";
+    h.innerText = "❤️";
+    h.style.left = Math.random()*100 + "%";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 5000);
   }, 300);
