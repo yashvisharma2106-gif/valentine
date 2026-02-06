@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
 <title>Dhruv 💘 Valentine</title>
 
 <style>
@@ -17,6 +17,7 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
 }
+
 /* Floating emojis */
 .floating {
   position: absolute;
@@ -28,86 +29,40 @@ body {
   to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* Main card */
+/* Card */
 .card {
   position: relative;
-  background: #ffffff;
+  background: #fff;
   width: 90%;
   max-width: 360px;
-  padding: 32px 24px 28px;
+  padding: 32px 24px;
   border-radius: 32px;
   text-align: center;
-  margin: auto;
-  box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.25),
-    0 0 0 3px rgba(255, 255, 255, 0.6);
-}
-  animation: cardEntry 0.8s ease-out;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+  animation: cardEntry 0.8s ease;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
 }
 
-/* subtle floating effect */
 @keyframes cardEntry {
-  0% {
-    transform: translateY(30px) scale(0.95);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-.card::after {
-  content: "";
-  position: absolute;
-  inset: -12px;
-  background: radial-gradient(circle, rgba(255,77,109,0.25), transparent 70%);
-  z-index: -1;
-  border-radius: 40px;
-}
-/* gradient border glow */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 32px;
-  background: linear-gradient(135deg, #ff4d6d, #ff9a9e, #ffd1dc);
-  z-index: -1;
+  from { transform: translateY(40px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-/* card entry animation */
-@keyframes cardEntry {
-  0% {
-    transform: translateY(30px) scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.4); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+/* Card flip */
+.card.flip {
+  transform: rotateY(180deg);
 }
 
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.1rem;
   color: #ff4d6d;
+  font-size: 2rem;
   margin-bottom: 12px;
-  letter-spacing: 1px;
-  animation: wiggle 2s infinite;
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-1deg); }
-  75% { transform: rotate(1deg); }
 }
 
 p {
-  font-size: 1.08rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #444;
   line-height: 1.5;
@@ -115,25 +70,13 @@ p {
 
 button {
   width: 100%;
-  padding: 15px;
+  padding: 14px;
   margin-top: 12px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.play {
-  background: #333;
-  color: white;
 }
 
 .yes {
@@ -144,31 +87,20 @@ button:hover {
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+  50% { transform: scale(1.07); }
   100% { transform: scale(1); }
 }
 
 .no {
   background: #eee;
-  position: relative;
 }
 
-/* Final hearts rain */
-.heart {
-  position: absolute;
-  font-size: 28px;
-  animation: heartRain 5s linear infinite;
-}
-@keyframes heartRain {
-  from { transform: translateY(-10vh); opacity: 1; }
-  to { transform: translateY(100vh); opacity: 0; }
-}
-  .confetti {
+/* Confetti */
+.confetti {
   position: fixed;
   top: -10px;
   width: 10px;
   height: 10px;
-  background: red;
   animation: fall 3s linear forwards;
   z-index: 999;
 }
@@ -179,60 +111,49 @@ button:hover {
     opacity: 0;
   }
 }
-
-/* 💌 Card flip */
-.card.flip {
-  transform: rotateY(180deg);
-}
-
-.card {
-  transition: transform 0.8s ease;
-  transform-style: preserve-3d;
-}
 </style>
 </head>
 
 <body>
+
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
   <p>
     Look at all this romance floating around 😌<br><br>
-    Okay, no pressure… but this decides snacks, dates, and vibes 🍿😏
+    Okay no pressure… but this decides snacks, dates & vibes 🍿😏
   </p>
 
-  <p style="font-size:0.9rem; font-weight:600; margin-top:10px;">
-  Background music removed for dramatic silence 😏
-</p>
-
+  <p style="font-size:0.9rem;">
+    Background music removed for dramatic silence 😏
+  </p>
 
   <button class="yes" onclick="yesClicked()">YES 💕</button>
   <button class="no" onmouseover="moveNo()">NO 🙄</button>
 </div>
+
 <script>
-/* Floating cute emojis */
+/* Floating emojis */
 const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
 setInterval(() => {
   const e = document.createElement("div");
   e.className = "floating";
   e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
   e.style.left = Math.random()*100 + "%";
-  e.style.animationDuration = (4 + Math.random()*3) + "s";
   document.body.appendChild(e);
   setTimeout(() => e.remove(), 6000);
 }, 500);
 
-
-/* NO button runs away */
+/* NO button moves */
 function moveNo() {
   const btn = document.querySelector(".no");
   btn.style.position = "absolute";
-  btn.style.left = Math.random()*80 + "%";
-  btn.style.top = Math.random()*80 + "%";
+  btn.style.left = Math.random()*70 + "%";
+  btn.style.top = Math.random()*70 + "%";
 }
 
+/* YES click */
 function yesClicked() {
   const card = document.getElementById("card");
-
   card.classList.add("flip");
 
   setTimeout(() => {
@@ -249,27 +170,21 @@ function yesClicked() {
 
   confettiBurst();
 }
-  `;
-  heartRain();
-}
 
-/* Heart rain animation */
-function heartRain() {
-  setInterval(() => {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.innerText = "❤️";
-    h.style.left = Math.random()*100 + "%";
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 5000);
-  }, 300);
+/* Confetti burst */
+function confettiBurst() {
+  const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
+  for (let i = 0; i < 80; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = 2 + Math.random()*2 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
 }
 </script>
 
 </body>
 </html>
-
-
-
-
-
