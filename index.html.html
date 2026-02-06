@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhruv 😌❤️</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff4d6d, #ffb3c1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.card {
+  background: white;
+  width: 90%;
+  max-width: 360px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+h1 {
+  color: #ff4d6d;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.play {
+  background: #333;
+  color: white;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: #eee;
+  position: relative;
+}
+
+.heart {
+  position: absolute;
+  bottom: 0;
+  font-size: 24px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div class="card" id="card">
+  <h1>Hey Dhruv 👀❤️</h1>
+  <p>
+    Important question 😌<br><br>
+    Will you be my Valentine?
+  </p>
+
+  <button class="play" onclick="playMusic()">🎷 Play Music</button>
+  <button class="yes" onclick="yesClicked()">YES 💕</button>
+  <button class="no" onmouseover="moveNo()">NO 🙄</button>
+</div>
+
+<script>
+function playMusic() {
+  const m = document.getElementById("music");
+  m.muted = false;
+  m.volume = 1.0;
+  m.play();
+}
+
+function moveNo() {
+  const btn = document.querySelector(".no");
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * 80 + "%";
+  btn.style.top = Math.random() * 80 + "%";
+}
+
+function yesClicked() {
+  document.getElementById("card").innerHTML = `
+    <h1>HAHA 😎❤️</h1>
+    <p>
+      You clicked YES, Dhruv 😌<br><br>
+      Careless Whisper approved 🎷<br>
+      You are my Valentine now 💃🕺
+    </p>
+  `;
+  startHearts();
+}
+
+function startHearts() {
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "%";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
