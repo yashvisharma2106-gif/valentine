@@ -2,71 +2,113 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Pacifico&display=swap" rel="stylesheet">
 
 <title>Dhruv 💘 Valentine</title>
 
 <style>
-* { box-sizing: border-box; }
-
+/* 🌈 BACKGROUND */
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ff6f91, #ffb6c1);
+  background:
+    radial-gradient(circle at top left, #ffd1dc, transparent 40%),
+    radial-gradient(circle at bottom right, #ff9a9e, transparent 40%),
+    linear-gradient(135deg, #ff758c, #ffb6c1);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
-  padding: 16px;
 }
 
-/* Floating emojis */
+/* 🌟 SPARKLES */
+.sparkles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sparkles::before,
+.sparkles::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+  background-size: 120px 120px, 180px 180px, 240px 240px;
+  animation: sparkleMove 22s linear infinite;
+}
+
+.sparkles::after {
+  animation-duration: 32s;
+  opacity: 0.6;
+}
+
+@keyframes sparkleMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-200px); }
+}
+
+/* 💕 FLOATING EMOJIS */
 .floating {
   position: absolute;
-  font-size: 20px;
+  font-size: 24px;
   animation: floatUp 6s linear infinite;
-  pointer-events: none;
+  z-index: 1;
 }
+
 @keyframes floatUp {
   from { transform: translateY(100vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* Card */
+/* 💌 CARD */
 .card {
+  position: relative;
+  z-index: 2;
   background: #ffffff;
-  width: 100%;
+  width: 90%;
   max-width: 360px;
-  padding: 28px 22px;
-  border-radius: 28px;
+  padding: 32px 24px;
+  border-radius: 32px;
   text-align: center;
   box-shadow: 0 25px 50px rgba(0,0,0,0.25);
   animation: cardEntry 0.8s ease;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
 }
 
 @keyframes cardEntry {
-  from { transform: translateY(40px) scale(0.95); opacity: 0; }
+  from { transform: translateY(40px) scale(0.9); opacity: 0; }
   to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* 💌 FLIP */
+.card.flip {
+  transform: rotateY(180deg);
 }
 
 h1 {
   font-family: 'Pacifico', cursive;
   color: #ff4d6d;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 12px;
 }
 
 p {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #444;
   line-height: 1.5;
 }
 
-/* Buttons */
+/* 🔘 BUTTONS */
 button {
   width: 100%;
   padding: 14px;
@@ -76,7 +118,7 @@ button {
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  touch-action: manipulation;
+  position: relative;
 }
 
 .yes {
@@ -87,25 +129,39 @@ button {
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.07); }
   100% { transform: scale(1); }
 }
 
 .no {
   background: #eee;
-  color: #333;
-  position: relative;
 }
 
-/* Confetti */
+/* 💘 HEART POP */
+.yes:hover::after {
+  content: "💘";
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 20px;
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* 🎉 CONFETTI */
 .confetti {
   position: fixed;
   top: -10px;
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   animation: fall 3s linear forwards;
   z-index: 999;
 }
+
 @keyframes fall {
   to {
     transform: translateY(110vh) rotate(360deg);
@@ -117,6 +173,10 @@ button {
 
 <body>
 
+<!-- 🌟 SPARKLE LAYER -->
+<div class="sparkles"></div>
+
+<!-- 💖 CARD -->
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
 
@@ -130,27 +190,27 @@ button {
     Dhruv is thinking… 🤔
   </p>
 
-  <p style="font-size:1rem;">
-    Will you be my Valentine? 😌
+  <p style="font-size:0.9rem;">
+    Background music removed for dramatic silence 😏
   </p>
 
   <button class="yes" onclick="yesClicked()">YES 💕</button>
-  <button class="no" onclick="moveNo()">NO 🙄</button>
+  <button class="no" onmouseover="moveNo()">NO 🙄</button>
 </div>
 
 <script>
-/* Floating emojis */
+/* 💕 FLOATING EMOJIS */
 const emojis = ["❤️","💘","🥰","😌","💃","🕺","🌹"];
 setInterval(() => {
   const e = document.createElement("div");
   e.className = "floating";
   e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
-  e.style.left = Math.random()*90 + "%";
+  e.style.left = Math.random()*100 + "%";
   document.body.appendChild(e);
   setTimeout(() => e.remove(), 6000);
-}, 600);
+}, 500);
 
-/* Thinking text toggle */
+/* 🤔 THINKING TEXT */
 setInterval(() => {
   const t = document.getElementById("thinking");
   if (!t) return;
@@ -159,40 +219,41 @@ setInterval(() => {
     : "Dhruv is thinking… 🤔";
 }, 2000);
 
-/* NO button escape – mobile safe */
+/* 😈 NO BUTTON ESCAPE */
 function moveNo() {
   const btn = document.querySelector(".no");
-  const maxX = window.innerWidth - btn.offsetWidth - 16;
-  const maxY = window.innerHeight - btn.offsetHeight - 16;
-
-  btn.style.position = "fixed";
-  btn.style.left = Math.random() * maxX + "px";
-  btn.style.top = Math.random() * maxY + "px";
+  btn.style.position = "absolute";
+  btn.style.left = Math.random()*75 + "%";
+  btn.style.top = Math.random()*75 + "%";
   btn.innerText = "NOPE 😜";
 }
 
-/* YES click */
+/* 💌 YES CLICK */
 function yesClicked() {
   const card = document.getElementById("card");
+  card.classList.add("flip");
 
-  card.innerHTML = `
-    <h1>HAHA 😎❤️</h1>
-    <p>
-      Dhruv, you said YES 😌<br><br>
-      You’re officially and forever mine now 💕<br><br>
-      <span style="background:#fff0f4; padding:6px 10px; border-radius:12px;">
-        🎉 Congratulations, you’re stuck with me 🎉
-      </span>
-    </p>
-    <p style="font-size:0.85rem; margin-top:10px;">
-      📸 Screenshot this moment — it’s officially ours 💖
-    </p>
-  `;
+  setTimeout(() => {
+    card.innerHTML = `
+      <h1>HAHA 😎❤️</h1>
+      <p>
+        Dhruv, you said YES 😌<br><br>
+        You’re officially and forever mine now 💕<br><br>
+        <span style="background:#fff0f4; padding:6px 10px; border-radius:12px;">
+          🎉 Congratulations, you’re stuck with me 🎉
+        </span>
+      </p>
+      <p style="font-size:0.85rem; margin-top:10px;">
+        📸 Screenshot this moment — it’s officially ours 💖
+      </p>
+    `;
+    card.classList.remove("flip");
+  }, 400);
 
   confettiBurst();
 }
 
-/* Confetti burst */
+/* 🎉 CONFETTI BURST */
 function confettiBurst() {
   const colors = ["#ff4d6d","#ffd166","#06d6a0","#118ab2","#ef476f"];
   for (let i = 0; i < 80; i++) {
