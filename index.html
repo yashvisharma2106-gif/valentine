@@ -31,18 +31,17 @@ body {
 /* Main card */
 .card {
   position: relative;
-  background: #ffffff; /* solid white */
+  background: #ffffff;
   width: 90%;
   max-width: 360px;
   padding: 32px 24px 28px;
   border-radius: 32px;
   text-align: center;
-
-  /* separation from background */
+  margin: auto;
   box-shadow:
     0 25px 50px rgba(0, 0, 0, 0.25),
     0 0 0 3px rgba(255, 255, 255, 0.6);
-
+}
   animation: cardEntry 0.8s ease-out;
 }
 
@@ -168,13 +167,6 @@ button:hover {
 </head>
 
 <body>
-
-<!-- Background Music -->
-<audio controls style="width:100%; margin-top:12px;">
-  <source src="music.mp3" type="audio/mpeg">
-  Your browser does not support audio.
-</audio>
-
 <div class="card" id="card">
   <h1>Hey Dhruv 👀❤️</h1>
   <p>
@@ -183,12 +175,8 @@ button:hover {
   </p>
 
   <p style="font-size:0.9rem; font-weight:600; margin-top:10px;">
-    Press play for the full vibe 🎷💘
-  </p>
-
-  <audio controls style="width:100%; margin-top:6px; border-radius:14px;">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  Background music removed for dramatic silence 😏
+</p>
 
 
   <button class="yes" onclick="yesClicked()">YES 💕</button>
@@ -245,6 +233,7 @@ function heartRain() {
 
 </body>
 </html>
+
 
 
 
